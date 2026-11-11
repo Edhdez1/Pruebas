@@ -4364,3 +4364,42 @@ h1, h2, h3, h4 {
 .copy-snippet-btn.copied {
     border-color: var(--primary-color) !important;
 }
+
+/* Selector de color en celular: la muestra arriba y los códigos debajo, a todo el ancho
+   (en una sola fila el campo del código quedaba de 11px y no se veía) */
+.code-group input {
+    min-width: 0;
+}
+@media (max-width: 600px) {
+    .color-info-box {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        padding: 16px;
+    }
+    .color-info-box .color-preview {
+        align-self: center;
+    }
+    .color-codes {
+        width: 100%;
+    }
+    /* Etiqueta y botón arriba; el código debajo, a todo el ancho */
+    .code-group {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "label button" "value value";
+        gap: 6px 8px;
+        padding: 8px 10px;
+    }
+    .code-group .code-label {
+        grid-area: label;
+        width: auto;
+    }
+    .code-group .copy-btn {
+        grid-area: button;
+    }
+    .code-group input {
+        grid-area: value;
+        width: 100%;
+    }
+}
