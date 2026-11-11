@@ -14,7 +14,7 @@ include 'includes/header.php';
             <div class="palette-actions">
                 <div class="snippet-search-box">
                     <label for="snippetSearchInput" class="visually-hidden">Buscar snippets</label>
-                    <input type="search" id="snippetSearchInput" placeholder="Buscar: centrado, scroll, texto…" class="snippet-filter-input" autocomplete="off">
+                    <input type="search" id="snippetSearchInput" placeholder="Buscar un snippet…" class="snippet-filter-input" autocomplete="off">
                 </div>
             </div>
         </header>

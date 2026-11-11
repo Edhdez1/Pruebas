@@ -4638,3 +4638,57 @@ h1, h2, h3, h4 {
         width: 100%;
     }
 }
+
+/* ==================================================== */
+/* SNIPPETS: botón "Copiar" en su propia franja          */
+/* Antes flotaba sobre el código y tapaba la 1.ª línea.  */
+/* ==================================================== */
+.snippet-code-box {
+    display: flex;
+    flex-direction: column;
+}
+.snippet-code-box .snippet-copy-btn {
+    position: static;
+    order: -1;
+    align-self: flex-end;
+    margin: 10px 10px 0;
+    backdrop-filter: none;
+}
+.snippet-code-box pre {
+    padding-top: 10px;
+}
+
+/* Cabecera fija opaca: al ser semitransparente el contenido se veía a través */
+:root {
+    --header-bg: #e7e7e5;
+}
+[data-theme="dark"] {
+    --header-bg: #121214;
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --header-bg: #121214;
+    }
+}
+
+@media (max-width: 600px) {
+    /* El código largo se desplaza dentro de su caja; letra algo menor en celular */
+    .snippet-code-box pre code {
+        font-size: 0.78rem;
+    }
+}
+
+/* Campos y botones usan la tipografía de la app (antes heredaban la del sistema) */
+input,
+select,
+textarea,
+button {
+    font-family: inherit;
+}
+
+@media (max-width: 600px) {
+    /* Recuadro de título de las páginas internas: menos relleno en celular */
+    .section-hero {
+        padding: 20px 18px;
+    }
+}
