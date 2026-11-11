@@ -4462,3 +4462,179 @@ h1, h2, h3, h4 {
     min-height: 0;
     overflow: hidden;
 }
+
+/* ==================================================== */
+/* CELULAR: cabecera compacta y página de paletas        */
+/* ==================================================== */
+
+/* Etiqueta de número de subpaletas: sin el azul del diseño anterior */
+.badge-subpalettes {
+    background: var(--primary-light);
+}
+
+@media (max-width: 600px) {
+    /* Cabecera: marca y botón de tema en una fila, menú debajo en una sola línea.
+       Antes ocupaba ~200px fijos y tapaba el contenido al bajar. */
+    .page-header {
+        margin-bottom: 20px;
+    }
+    .header-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        text-align: left;
+        gap: 8px;
+        padding: 10px 16px 0;
+    }
+    .nav-right-actions {
+        display: contents;
+    }
+    .brand-logo {
+        order: 1;
+        font-size: 1.15rem;
+    }
+    .theme-toggle-btn {
+        order: 2;
+        width: 34px;
+        height: 34px;
+    }
+    .main-nav {
+        order: 3;
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 0;
+    }
+    .nav-link {
+        margin: 0;
+        padding: 10px 2px;
+        font-size: 0.9rem;
+    }
+
+    /* Desplegables de paletas: la flecha junto al título, las muestras debajo */
+    .palette-summary,
+    .subpalette-summary {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 14px 16px;
+    }
+    .summary-main,
+    .sub-summary-main {
+        flex-wrap: nowrap;
+        min-width: 0;
+    }
+    .sub-summary-main .badge-count {
+        white-space: nowrap;
+    }
+    .preview-swatches {
+        padding-left: 30px;
+    }
+
+    .subpalette-header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* Tabla de colores convertida en fichas: antes medía 762px y los códigos
+       RGB y HSL quedaban ocultos a la derecha */
+    .table-responsive {
+        overflow-x: visible;
+    }
+    .palette-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+    }
+    .palette-table,
+    .palette-table tbody {
+        display: block;
+        width: 100%;
+    }
+    .palette-table tr {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 10px;
+        padding: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .palette-table tr:last-child {
+        border-bottom: none;
+    }
+    .palette-table tbody td,
+    [data-theme="dark"] .palette-table tbody td,
+    [data-theme="dark"] .palette-table td {
+        display: block;
+        padding: 0;
+        border: none;
+    }
+    /* Menos relleno en las cajas anidadas para dar más ancho a las fichas */
+    .palette-body {
+        padding: 0 12px 14px;
+    }
+    .subpalette-body {
+        padding: 12px 10px 14px;
+    }
+    /* Línea 1: muestra, nombre y HEX. Línea 2: RGB y HSL */
+    .palette-table .td-swatch { order: 1; }
+    .palette-table .td-name {
+        order: 2;
+        flex: 1 1 0;
+        min-width: 0;
+    }
+    .palette-table .td-code { order: 3; }
+    .palette-table .td-code + .td-code {
+        flex: 1 1 140px;
+        min-width: 0;
+    }
+    .palette-table .td-code:nth-child(3) {
+        margin-left: auto;
+    }
+    .palette-table .td-swatch {
+        width: auto;
+    }
+    .palette-table .color-swatch {
+        width: 28px;
+        height: 28px;
+        margin: 0;
+    }
+    .palette-table .copy-badge {
+        max-width: 100%;
+        padding: 4px 8px;
+    }
+    .palette-table .copy-badge code {
+        font-size: 0.74rem;
+        white-space: nowrap;
+    }
+
+    /* Pestañas del diálogo de exportar: en dos filas, todas visibles */
+    .export-format-tabs {
+        flex-wrap: wrap;
+        overflow-x: visible;
+    }
+    .export-tab-btn {
+        flex: 1 1 calc(50% - 6px);
+    }
+}
+
+/* Celulares muy pequeños (320px): tarjetas y buscador sin ancho mínimo fijo */
+.feature-cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+}
+.snippet-search-box,
+.snippet-filter-input {
+    max-width: 100%;
+}
+@media (max-width: 600px) {
+    .snippet-search-box,
+    .snippet-filter-input {
+        width: 100%;
+        min-width: 0;
+    }
+    .palette-actions {
+        width: 100%;
+    }
+}
