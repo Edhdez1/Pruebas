@@ -1,13 +1,20 @@
 <?php
 // backend/get_all_fonts.php
-header('Content-Type: application/json');
-require_once 'db.php';
+// API: devuelve la lista de nombres de fuentes (JSON).
+header('Content-Type: application/json; charset=utf-8');
+require_once __DIR__ . '/db.php';
 
-try {
-    $stmt = $pdo->query("SELECT name FROM fonts ORDER BY name ASC");
-    $fonts = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    echo json_encode($fonts);
-} catch (\PDOException $e) {
-    echo json_encode(["error" => $e->getMessage()]);
+$fonts = null;
+if ($pdo) {
+    try {
+        $fonts = $pdo->query("SELECT name FROM fonts ORDER BY name ASC")->fetchAll(PDO::FETCH_COLUMN);
+    } catch (\Throwable $e) {
+        error_log('CSS Helper: ' . $e->getMessage());
+    }
 }
-?>
+if (!$fonts) {
+    $fonts = array_column(cssHelperDefaultFonts(), 'name');
+    sort($fonts);
+}
+
+echo json_encode($fonts, JSON_UNESCAPED_UNICODE);

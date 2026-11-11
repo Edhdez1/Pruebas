@@ -15,7 +15,6 @@
         const glassPreviewStage = document.getElementById('glassPreviewStage');
         const glassCssOutput = document.getElementById('glassCssOutput');
         const copyGlassCssBtn = document.getElementById('copyGlassCssBtn');
-        const copyGlassCssText = document.getElementById('copyGlassCssText');
         const glassBgButtons = document.querySelectorAll('.glass-bg-btn');
 
         function updateGlassmorphism() {
@@ -54,27 +53,15 @@
         // Fondos de prueba
         glassBgButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                glassBgButtons.forEach(b => b.classList.remove('active'));
+                glassBgButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
                 const bgType = btn.getAttribute('data-stage-bg');
                 glassPreviewStage.className = `glass-preview-stage ${bgType}`;
             });
         });
 
-        if (copyGlassCssBtn) {
-            copyGlassCssBtn.addEventListener('click', () => {
-                const code = glassCssOutput.value;
-                navigator.clipboard.writeText(code).then(() => {
-                    copyGlassCssText.textContent = '¡Copiado!';
-                    copyGlassCssBtn.classList.add('copied');
-                    showToolsToast('¡CSS de Glassmorphism copiado al portapapeles!');
-                    setTimeout(() => {
-                        copyGlassCssText.textContent = 'Copiar';
-                        copyGlassCssBtn.classList.remove('copied');
-                    }, 1800);
-                });
-            });
-        }
+        bindCopyButton(copyGlassCssBtn, () => glassCssOutput.value, 'CSS de glassmorphism copiado');
 
         // Iniciar valores de Glassmorphism
         updateGlassmorphism();

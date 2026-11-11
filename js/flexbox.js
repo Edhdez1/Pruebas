@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnRemoveItem = document.getElementById('btnRemoveItem');
     const flexCssOutput = document.getElementById('flexCssOutput');
     const copyFlexCssBtn = document.getElementById('copyFlexCssBtn');
-    const copyFlexCssText = document.getElementById('copyFlexCssText');
 
     let currentMode = 'flex'; // 'flex' o 'grid'
     let itemCount = 4;
@@ -83,6 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
             currentMode = 'flex';
             btnModeFlex.classList.add('active');
             btnModeGrid.classList.remove('active');
+            btnModeFlex.setAttribute('aria-pressed', 'true');
+            btnModeGrid.setAttribute('aria-pressed', 'false');
             if (ctrlDirectionWrapper) ctrlDirectionWrapper.style.display = 'flex';
             if (ctrlWrapWrapper) ctrlWrapWrapper.style.display = 'flex';
             if (ctrlGridColsWrapper) ctrlGridColsWrapper.style.display = 'none';
@@ -93,6 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
             currentMode = 'grid';
             btnModeGrid.classList.add('active');
             btnModeFlex.classList.remove('active');
+            btnModeGrid.setAttribute('aria-pressed', 'true');
+            btnModeFlex.setAttribute('aria-pressed', 'false');
             if (ctrlDirectionWrapper) ctrlDirectionWrapper.style.display = 'none';
             if (ctrlWrapWrapper) ctrlWrapWrapper.style.display = 'none';
             if (ctrlGridColsWrapper) ctrlGridColsWrapper.style.display = 'flex';
@@ -111,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnAddItem.addEventListener('click', () => {
             if (itemCount >= MAX_ITEMS) {
                 if (typeof showToast === 'function') {
-                    showToast(`Límite alcanzado: máximo ${MAX_ITEMS} elementos`);
+                    showToast(`Máximo ${MAX_ITEMS} elementos`);
                 }
                 return;
             }
@@ -127,7 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnRemoveItem) {
         btnRemoveItem.addEventListener('click', () => {
-            if (itemCount <= 1) return;
+            if (itemCount <= 1) {
+                showToast('Debe quedar al menos 1 elemento');
+                return;
+            }
             if (flexStageContainer.lastElementChild) {
                 flexStageContainer.lastElementChild.remove();
             }
@@ -137,22 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (copyFlexCssBtn) {
-        copyFlexCssBtn.addEventListener('click', () => {
-            const code = flexCssOutput ? flexCssOutput.value : '';
-            navigator.clipboard.writeText(code).then(() => {
-                if (copyFlexCssText) copyFlexCssText.textContent = '¡Copiado!';
-                copyFlexCssBtn.classList.add('copied');
-                if (typeof showToast === 'function') {
-                    showToast('¡CSS de Layout copiado al portapapeles!');
-                }
-                setTimeout(() => {
-                    if (copyFlexCssText) copyFlexCssText.textContent = 'Copiar';
-                    copyFlexCssBtn.classList.remove('copied');
-                }, 1800);
-            });
-        });
-    }
+    bindCopyButton(copyFlexCssBtn, () => flexCssOutput ? flexCssOutput.value : '', 'CSS del layout copiado');
 
     // Inicializar simulador
     updateFlexboxGenerator();

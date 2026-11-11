@@ -36,8 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (catButtons) {
         catButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                catButtons.forEach(b => b.classList.remove('active'));
+                catButtons.forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
                 activeCat = btn.getAttribute('data-cat');
                 filterSnippets();
             });
@@ -50,26 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Copiar snippets al portapapeles
     document.querySelectorAll('.snippet-copy-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const code = btn.getAttribute('data-code');
-            if (!code) return;
-
-            navigator.clipboard.writeText(code).then(() => {
-                const originalHtml = btn.innerHTML;
-                btn.innerHTML = `<svg width="14" height="14"><use href="#icon-check"></use></svg><span>¡Copiado!</span>`;
-                btn.classList.add('copied');
-
-                if (typeof showToast === 'function') {
-                    showToast('¡Snippet copiado al portapapeles!');
-                }
-
-                setTimeout(() => {
-                    btn.innerHTML = originalHtml;
-                    btn.classList.remove('copied');
-                }, 2000);
-            }).catch(err => {
-                console.error('Error al copiar snippet:', err);
-            });
-        });
+        bindCopyButton(btn, () => btn.getAttribute('data-code'), 'Snippet copiado');
     });
 });
