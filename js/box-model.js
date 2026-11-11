@@ -88,6 +88,50 @@
             bmRender();
         }
 
+        // Panel de valores: 3 capas x 4 lados, con campos numéricos
+        const bmSideNames = { top: 'Arriba', right: 'Derecha', bottom: 'Abajo', left: 'Izquierda' };
+        const bmInputEls = {};
+
+        function bmBuildInputs() {
+            const panel = document.getElementById('boxModelInputs');
+            if (!panel) return;
+            panel.innerHTML = '';
+            const head = document.createElement('div');
+            head.className = 'bm-values-row bm-values-head';
+            head.innerHTML = '<span></span>' + Object.values(bmSideNames).map(n => `<span>${n}</span>`).join('');
+            panel.appendChild(head);
+
+            ['margin', 'border', 'padding'].forEach(name => {
+                const row = document.createElement('div');
+                row.className = 'bm-values-row';
+                const label = document.createElement('span');
+                label.className = 'bm-values-name';
+                label.innerHTML = `<span class="bm-legend-swatch" style="background:${bmLayerColors[name]}"></span>${name}`;
+                row.appendChild(label);
+
+                Object.keys(bmSideNames).forEach(side => {
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.inputMode = 'numeric';
+                    input.id = `bm-${name}-${side}`;
+                    input.min = bmLayerLimits[name].min;
+                    input.max = bmLayerLimits[name].max;
+                    input.setAttribute('aria-label', `${name} ${bmSideNames[side].toLowerCase()}, en píxeles`);
+                    input.addEventListener('input', () => {
+                        const n = parseInt(input.value, 10);
+                        if (Number.isNaN(n)) return;
+                        const limits = bmLayerLimits[name];
+                        boxModel[name][side] = Math.max(limits.min, Math.min(limits.max, n));
+                        bmRender();
+                    });
+                    input.addEventListener('blur', () => { input.value = boxModel[name][side]; });
+                    bmInputEls[`${name}_${side}`] = input;
+                    row.appendChild(input);
+                });
+                panel.appendChild(row);
+            });
+        }
+
         function bmRender() {
             ['margin', 'border', 'padding'].forEach(name => {
                 const v = boxModel[name];
@@ -95,7 +139,13 @@
                 g.style.gridTemplateColumns = `${v.left}px auto ${v.right}px`;
                 g.style.gridTemplateRows = `${v.top}px auto ${v.bottom}px`;
                 ['top', 'right', 'bottom', 'left'].forEach(s => {
-                    bmValEls[`${name}_${s}`].textContent = v[s];
+                    const el = bmValEls[`${name}_${s}`];
+                    el.textContent = v[s];
+                    // Si la franja es demasiado delgada, el número no cabe: se oculta en el
+                    // diagrama (sigue visible en el panel de valores de abajo)
+                    el.hidden = v[s] < 14;
+                    const input = bmInputEls[`${name}_${s}`];
+                    if (input && document.activeElement !== input) input.value = v[s];
                 });
             });
 
@@ -182,6 +232,7 @@
             showToast('Valores iniciales restablecidos');
         });
 
+        bmBuildInputs();
         bmBuild();
 
 

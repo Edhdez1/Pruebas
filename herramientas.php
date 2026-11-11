@@ -86,6 +86,9 @@ include 'includes/header.php';
                             <div id="boxModelVisual"></div>
                         </div>
 
+                        <!-- Valores exactos: siempre visibles aunque una franja sea muy delgada -->
+                        <div class="bm-values" id="boxModelInputs" role="group" aria-label="Valores del modelo de caja en píxeles"></div>
+
                         <!-- Salida CSS con tema oscuro de editor -->
                         <div class="card-code-snippet code-output-panel">
                             <div class="code-output-header">

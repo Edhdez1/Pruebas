@@ -4403,3 +4403,62 @@ h1, h2, h3, h4 {
         width: 100%;
     }
 }
+
+/* Modelo de caja: panel de valores exactos (los números no caben en franjas delgadas) */
+.bm-values {
+    display: grid;
+    gap: 6px;
+    margin-top: 14px;
+}
+.bm-values-row {
+    display: grid;
+    grid-template-columns: 5.5rem repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    align-items: center;
+}
+.bm-values-head span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+.bm-values-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    color: var(--text-color);
+}
+.bm-values input {
+    width: 100%;
+    min-width: 0;
+    padding: 6px 4px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+}
+@media (max-width: 420px) {
+    .bm-values-row {
+        grid-template-columns: 4.5rem repeat(4, minmax(0, 1fr));
+        gap: 4px;
+    }
+    .bm-values-head span {
+        font-size: 0.68rem;
+    }
+}
+
+.bm-val[hidden] {
+    display: none;
+}
+/* Cada franja mide exactamente su valor: el mínimo de 12px hacía que el borde
+   de 5px se saliera de su sitio y tapara el número del margen */
+.bm-edge {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
