@@ -11,9 +11,10 @@
         const bmDefaults = JSON.parse(JSON.stringify(boxModel));
 
         const bmLayerColors = {
-            margin:  'rgba(246, 178, 107, 0.65)',
-            border:  'rgba(253, 216, 53, 0.65)',
-            padding: 'rgba(129, 199, 132, 0.65)'
+            // Colores opacos: con transparencia el texto perdía contraste en modo oscuro
+            margin:  '#f9cb9c',
+            border:  '#fde68a',
+            padding: '#b6dcb8'
         };
 
         const bmLayerLimits = {
@@ -65,7 +66,7 @@
                             val.className = 'bm-val';
                             cell.appendChild(val);
                             bmValEls[`${name}_${side}`] = val;
-                            cell.addEventListener('mousedown', bmStartDrag);
+                            cell.addEventListener('pointerdown', bmStartDrag);
                         } else {
                             cell.className = 'bm-corner';
                             cell.style.backgroundColor = bmLayerColors[name];
@@ -121,10 +122,12 @@
             document.getElementById('boxModelCssOutput').value = css;
         }
 
+        // Pointer Events: funciona con ratón, dedo y lápiz
         function bmStartDrag(e) {
             e.preventDefault();
-            const layer = e.currentTarget.dataset.layer;
-            const side = e.currentTarget.dataset.side;
+            const cell = e.currentTarget;
+            const layer = cell.dataset.layer;
+            const side = cell.dataset.side;
             bmDragState = {
                 layer, side,
                 startX: e.clientX,
@@ -132,8 +135,9 @@
                 startValue: boxModel[layer][side]
             };
             document.body.style.userSelect = 'none';
-            document.addEventListener('mousemove', bmOnDrag);
-            document.addEventListener('mouseup', bmEndDrag);
+            document.addEventListener('pointermove', bmOnDrag);
+            document.addEventListener('pointerup', bmEndDrag);
+            document.addEventListener('pointercancel', bmEndDrag);
         }
 
         function bmOnDrag(e) {
@@ -141,9 +145,12 @@
             const { layer, side, startX, startY, startValue } = bmDragState;
             const limits = bmLayerLimits[layer];
 
-            const delta = (side === 'top' || side === 'bottom')
-                ? (e.clientY - startY)
-                : (e.clientX - startX);
+            // Arrastrar hacia fuera agranda el lado; hacia dentro lo reduce
+            let delta;
+            if (side === 'top') delta = startY - e.clientY;
+            else if (side === 'bottom') delta = e.clientY - startY;
+            else if (side === 'left') delta = startX - e.clientX;
+            else delta = e.clientX - startX;
 
             let val = Math.round(startValue + delta);
             val = Math.max(limits.min, Math.min(limits.max, val));
@@ -154,20 +161,16 @@
         function bmEndDrag() {
             bmDragState = null;
             document.body.style.userSelect = '';
-            document.removeEventListener('mousemove', bmOnDrag);
-            document.removeEventListener('mouseup', bmEndDrag);
+            document.removeEventListener('pointermove', bmOnDrag);
+            document.removeEventListener('pointerup', bmEndDrag);
+            document.removeEventListener('pointercancel', bmEndDrag);
         }
 
-        document.getElementById('copyBoxModelCss').addEventListener('click', () => {
-            const textarea = document.getElementById('boxModelCssOutput');
-            textarea.select();
-            document.execCommand('copy');
-            const btnText = document.getElementById('copyBoxModelCssText');
-            const orig = btnText.textContent;
-            btnText.textContent = '¡Copiado!';
-            showToolsToast('¡Código del Box Model copiado al portapapeles!');
-            setTimeout(() => btnText.textContent = orig, 1500);
-        });
+        bindCopyButton(
+            document.getElementById('copyBoxModelCss'),
+            () => document.getElementById('boxModelCssOutput').value,
+            'Código del modelo de caja copiado'
+        );
 
         document.getElementById('resetBoxModel').addEventListener('click', () => {
             Object.keys(bmDefaults).forEach(key => {
@@ -176,7 +179,7 @@
                 }
             });
             bmRender();
-            showToolsToast('Box Model reseteado a valores iniciales');
+            showToast('Valores iniciales restablecidos');
         });
 
         bmBuild();

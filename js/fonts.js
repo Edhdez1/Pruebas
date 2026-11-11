@@ -56,7 +56,7 @@
                     }
                 })
                 .catch(() => {
-                    searchMessage.textContent = "Error de conexión con la base de datos local.";
+                    searchMessage.textContent = "No se pudo cargar la fuente. Revisa que el servidor local esté encendido.";
                     searchMessage.style.display = 'block';
                 });
         }
@@ -67,17 +67,22 @@
             .then(fonts => {
                 fontChipsGrid.innerHTML = '';
                 if (!fonts || fonts.error || fonts.length === 0) {
-                    fontChipsGrid.innerHTML = '<span style="color:#ef4444;font-size:.85rem;">No se encontraron fuentes en la base de datos.</span>';
+                    fontChipsGrid.innerHTML = '<span class="font-chips-error">No hay fuentes disponibles todavía.</span>';
                     return;
                 }
                 fonts.forEach((font, index) => {
                     const btn = document.createElement('button');
                     btn.className = 'font-chip-btn' + (index === 0 ? ' active' : '');
+                    btn.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
                     btn.textContent = font;
                     btn.type = 'button';
                     btn.addEventListener('click', () => {
-                        document.querySelectorAll('.font-chip-btn').forEach(b => b.classList.remove('active'));
+                        document.querySelectorAll('.font-chip-btn').forEach(b => {
+                            b.classList.remove('active');
+                            b.setAttribute('aria-pressed', 'false');
+                        });
                         btn.classList.add('active');
+                        btn.setAttribute('aria-pressed', 'true');
                         fetchFontData(font);
                     });
                     fontChipsGrid.appendChild(btn);
@@ -86,7 +91,7 @@
                 fetchFontData(fonts[0]);
             })
             .catch(() => {
-                fontChipsGrid.innerHTML = '<span style="color:#ef4444;font-size:.85rem;">Error al cargar las fuentes.</span>';
+                fontChipsGrid.innerHTML = '<span class="font-chips-error">No se pudieron cargar las fuentes. Revisa que el servidor local esté encendido.</span>';
             });
 
         // ==========================================

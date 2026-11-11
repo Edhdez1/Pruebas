@@ -7,8 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toolsCodeSnippet = document.getElementById('toolsCodeSnippet');
     const toolsEffectButtons = document.querySelectorAll('#toolsEffectPills .pill-btn[data-effect]');
     const copyToolsBtn = document.getElementById('copyToolsSnippet');
-    const copyToolsBtnText = document.getElementById('copyToolsSnippetText');
-
+    
     const toolsEffectsData = {
         glow: {
             title: 'Neón Glow',
@@ -47,8 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = toolsEffectsData[effect];
                 if (!data) return;
 
-                toolsEffectButtons.forEach(btn => btn.classList.remove('active'));
+                toolsEffectButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
                 button.classList.add('active');
+                button.setAttribute('aria-pressed', 'true');
 
                 if (toolsDemoBox) toolsDemoBox.className = 'demo-box ' + data.cssClass;
                 if (toolsDemoIcon) toolsDemoIcon.textContent = data.icon;
@@ -60,31 +60,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (copyToolsBtn) {
-        copyToolsBtn.addEventListener('click', () => {
-            const textToCopy = toolsCodeSnippet ? toolsCodeSnippet.textContent : '';
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                if (copyToolsBtnText) copyToolsBtnText.textContent = '¡Copiado!';
-                copyToolsBtn.classList.add('copied');
-                if (typeof showToast === 'function') {
-                    showToast('¡Código CSS copiado al portapapeles!');
-                }
-                setTimeout(() => {
-                    if (copyToolsBtnText) copyToolsBtnText.textContent = 'Copiar';
-                    copyToolsBtn.classList.remove('copied');
-                }, 1800);
-            }).catch(() => {
-                const temp = document.createElement('textarea');
-                temp.value = textToCopy;
-                document.body.appendChild(temp);
-                temp.select();
-                document.execCommand('copy');
-                document.body.removeChild(temp);
-                if (copyToolsBtnText) copyToolsBtnText.textContent = '¡Copiado!';
-                setTimeout(() => { 
-                    if (copyToolsBtnText) copyToolsBtnText.textContent = 'Copiar'; 
-                }, 1800);
-            });
-        });
-    }
+    bindCopyButton(copyToolsBtn, () => toolsCodeSnippet ? toolsCodeSnippet.textContent : '', 'Código CSS copiado');
 });
