@@ -9,11 +9,7 @@ include 'includes/header.php';
         <!-- Encabezado de la Sección de Paletas -->
         <header class="section-hero">
             <div class="hero-text">
-                <div class="hero-badge">
-                    <span class="badge-dot"></span>
-                    <span>Clic para copiar</span>
-                </div>
-                <h1>Paletas de <span class="text-gradient">colores</span></h1>
+                <h1>Paletas de colores</h1>
                 <p>Paletas populares organizadas por variante. Haz clic en cualquier código HEX, RGB o HSL para copiarlo, o exporta la paleta completa como variables CSS, Tailwind, JSON o SCSS.</p>
             </div>
             <div class="palette-actions">

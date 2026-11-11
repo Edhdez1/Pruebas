@@ -9,11 +9,7 @@ include 'includes/header.php';
         <!-- Encabezado de Herramientas -->
         <header class="section-hero">
             <div class="hero-text">
-                <div class="hero-badge">
-                    <span class="badge-dot"></span>
-                    <span>7 herramientas</span>
-                </div>
-                <h1>Generadores y <span class="text-gradient">herramientas CSS</span></h1>
+                <h1>Generadores y herramientas CSS</h1>
                 <p>Mueve los controles y mira el cambio al instante. Cada herramienta genera el código CSS listo para copiar.</p>
             </div>
         </header>
@@ -25,20 +21,11 @@ include 'includes/header.php';
             <section class="column-left">
                 <!-- MÓDULO 1: Selector de Color -->
                 <div class="interactive-preview-card tool-module-card" id="colorPickerCard">
-                    <div class="card-glass-header" aria-hidden="true">
-                        <div class="window-dots">
-                            <span class="dot dot-red"></span>
-                            <span class="dot dot-yellow"></span>
-                            <span class="dot dot-green"></span>
-                        </div>
-                        <span class="window-title">color-picker.css</span>
-                        <span class="badge-live">COLOR</span>
-                    </div>
 
                     <div class="card-module-body">
                         <div class="module-title-row">
                             <h2>Selector de color</h2>
-                            <span class="module-hint">HEX · RGB · HSL</span>
+                            <span class="module-hint">HEX, RGB, HSL</span>
                         </div>
 
                         <div class="color-picker-widget-inner">
@@ -81,15 +68,6 @@ include 'includes/header.php';
 
                 <!-- MÓDULO 2: Modelo de Caja CSS (Box Model) -->
                 <div class="interactive-preview-card tool-module-card" id="boxModelCard" style="margin-top: 28px;">
-                    <div class="card-glass-header" aria-hidden="true">
-                        <div class="window-dots">
-                            <span class="dot dot-red"></span>
-                            <span class="dot dot-yellow"></span>
-                            <span class="dot dot-green"></span>
-                        </div>
-                        <span class="window-title">box-model.css</span>
-                        <span class="badge-live">BOX MODEL</span>
-                    </div>
 
                     <div class="card-module-body">
                         <div class="module-title-row">
@@ -127,15 +105,6 @@ include 'includes/header.php';
 
                 <!-- MÓDULO 5: Generador de Flexbox & CSS Grid -->
                 <div class="interactive-preview-card tool-module-card" id="flexboxCard" style="margin-top: 28px;">
-                    <div class="card-glass-header" aria-hidden="true">
-                        <div class="window-dots">
-                            <span class="dot dot-red"></span>
-                            <span class="dot dot-yellow"></span>
-                            <span class="dot dot-green"></span>
-                        </div>
-                        <span class="window-title">flexbox-grid-builder.css</span>
-                        <span class="badge-live">LAYOUT BUILDER</span>
-                    </div>
 
                     <div class="card-module-body">
                         <div class="module-title-row">
@@ -258,15 +227,6 @@ include 'includes/header.php';
             <section class="column-right">
                 <!-- MÓDULO: Comprobador de Accesibilidad y Contraste WCAG (Simplificado) -->
                 <div class="interactive-preview-card tool-module-card" id="contrastCard">
-                    <div class="card-glass-header" aria-hidden="true">
-                        <div class="window-dots">
-                            <span class="dot dot-red"></span>
-                            <span class="dot dot-yellow"></span>
-                            <span class="dot dot-green"></span>
-                        </div>
-                        <span class="window-title">contrast-preview.css</span>
-                        <span class="badge-live">CONTRASTE</span>
-                    </div>
 
                     <div class="card-module-body">
                         <div class="module-title-row">
@@ -279,8 +239,8 @@ include 'includes/header.php';
                             <div class="contrast-picker-box">
                                 <label for="contrastTextHex" class="contrast-label">Color del texto</label>
                                 <div class="contrast-input-wrap">
-                                    <input type="color" id="contrastTextColor" value="#0f172a" class="contrast-color-native" aria-label="Elegir color del texto">
-                                    <input type="text" id="contrastTextHex" value="#0f172a" class="contrast-hex-input" maxlength="7" spellcheck="false" autocomplete="off">
+                                    <input type="color" id="contrastTextColor" value="#1b1b1e" class="contrast-color-native" aria-label="Elegir color del texto">
+                                    <input type="text" id="contrastTextHex" value="#1b1b1e" class="contrast-hex-input" maxlength="7" spellcheck="false" autocomplete="off">
                                 </div>
                             </div>
 
@@ -318,10 +278,10 @@ include 'includes/header.php';
                             </div>
                             <p class="contrast-verdict" id="contrastRatioVerdict"></p>
                             <ul class="contrast-checks">
-                                <li id="checkAaNormal"><span>AA · texto normal <small>(4.5:1)</small></span><span class="check-state"></span></li>
-                                <li id="checkAaLarge"><span>AA · texto grande <small>(3:1)</small></span><span class="check-state"></span></li>
-                                <li id="checkAaaNormal"><span>AAA · texto normal <small>(7:1)</small></span><span class="check-state"></span></li>
-                                <li id="checkAaaLarge"><span>AAA · texto grande <small>(4.5:1)</small></span><span class="check-state"></span></li>
+                                <li id="checkAaNormal"><span>AA, texto normal <small>(4.5:1)</small></span><span class="check-state"></span></li>
+                                <li id="checkAaLarge"><span>AA, texto grande <small>(3:1)</small></span><span class="check-state"></span></li>
+                                <li id="checkAaaNormal"><span>AAA, texto normal <small>(7:1)</small></span><span class="check-state"></span></li>
+                                <li id="checkAaaLarge"><span>AAA, texto grande <small>(4.5:1)</small></span><span class="check-state"></span></li>
                             </ul>
                         </div>
                     </div>
@@ -329,15 +289,6 @@ include 'includes/header.php';
 
                 <!-- MÓDULO 3: Buscador de Fuentes Google Fonts -->
                 <div class="interactive-preview-card tool-module-card" id="fontSearchCard" style="margin-top: 28px;">
-                    <div class="card-glass-header" aria-hidden="true">
-                        <div class="window-dots">
-                            <span class="dot dot-red"></span>
-                            <span class="dot dot-yellow"></span>
-                            <span class="dot dot-green"></span>
-                        </div>
-                        <span class="window-title">google-fonts.css</span>
-                        <span class="badge-live">GOOGLE FONTS</span>
-                    </div>
 
                     <div class="card-module-body">
                         <div class="module-title-row">
@@ -401,15 +352,6 @@ include 'includes/header.php';
 
                 <!-- MÓDULO 4: Efectos Visuales CSS -->
                 <div class="interactive-preview-card tool-module-card" id="toolsInteractiveCard" style="margin-top: 28px;">
-                    <div class="card-glass-header" aria-hidden="true">
-                        <div class="window-dots">
-                            <span class="dot dot-red"></span>
-                            <span class="dot dot-yellow"></span>
-                            <span class="dot dot-green"></span>
-                        </div>
-                        <span class="window-title">effects-presets.css</span>
-                        <span class="badge-live">EFECTOS</span>
-                    </div>
 
                     <div class="card-module-body">
                         <div class="module-title-row">
@@ -458,15 +400,6 @@ background: #ffffff;</code></pre>
 
                 <!-- MÓDULO 6: Generador de Efectos Glassmorphism Avanzado -->
                 <div class="interactive-preview-card tool-module-card" id="glassmorphismCard" style="margin-top: 28px;">
-                    <div class="card-glass-header" aria-hidden="true">
-                        <div class="window-dots">
-                            <span class="dot dot-red"></span>
-                            <span class="dot dot-yellow"></span>
-                            <span class="dot dot-green"></span>
-                        </div>
-                        <span class="window-title">glassmorphism-studio.css</span>
-                        <span class="badge-live">GLASS STUDIO</span>
-                    </div>
 
                     <div class="card-module-body">
                         <div class="module-title-row">
@@ -475,7 +408,7 @@ background: #ffffff;</code></pre>
                         </div>
 
                         <!-- Escenario de previsualización con fondo degradado y esferas flotantes -->
-                        <div class="glass-preview-stage" id="glassPreviewStage">
+                        <div class="glass-preview-stage gradient-purple" id="glassPreviewStage">
                             <div class="glass-stage-orb orb-1"></div>
                             <div class="glass-stage-orb orb-2"></div>
                             <div class="glass-stage-card" id="glassStageCard">

@@ -8,11 +8,7 @@ include 'includes/header.php';
         <!-- Hero de la sección -->
         <header class="section-hero">
             <div class="hero-text">
-                <div class="hero-badge">
-                    <span class="badge-dot"></span>
-                    <span>Copiar y pegar</span>
-                </div>
-                <h1>Snippets de <span class="text-gradient">CSS moderno</span></h1>
+                <h1>Snippets de CSS moderno</h1>
                 <p>Soluciones cortas para problemas frecuentes de maquetación, texto, scroll y estilos base. Cada una con vista previa y botón para copiar.</p>
             </div>
             <div class="palette-actions">
@@ -38,15 +34,6 @@ include 'includes/header.php';
 
             <!-- SNIPPET 1: Centrado absoluto moderno -->
             <article class="interactive-preview-card snippet-card" data-cat="layout" data-title="centrado absoluto moderno grid place-items center">
-                <div class="card-glass-header" aria-hidden="true">
-                    <div class="window-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-                    <span class="window-title">layout-center.css</span>
-                    <span class="badge-live">GRID</span>
-                </div>
                 <div class="card-module-body snippet-body">
                     <div class="snippet-header-info">
                         <h2>Centrado perfecto con Grid</h2>
@@ -76,15 +63,6 @@ include 'includes/header.php';
 
             <!-- SNIPPET 2: Truncado de texto (1 línea con elipsis) -->
             <article class="interactive-preview-card snippet-card" data-cat="text" data-title="truncado texto elipsis una linea overflow ellipsis nowrap">
-                <div class="card-glass-header" aria-hidden="true">
-                    <div class="window-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-                    <span class="window-title">truncate-single.css</span>
-                    <span class="badge-live">TEXTO</span>
-                </div>
                 <div class="card-module-body snippet-body">
                     <div class="snippet-header-info">
                         <h2>Cortar texto en 1 línea</h2>
@@ -113,15 +91,6 @@ include 'includes/header.php';
 
             <!-- SNIPPET 3: Truncado multilínea con Line-Clamp -->
             <article class="interactive-preview-card snippet-card" data-cat="text" data-title="truncado multiline clamp line clamp lineas parrafo">
-                <div class="card-glass-header" aria-hidden="true">
-                    <div class="window-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-                    <span class="window-title">truncate-multiline.css</span>
-                    <span class="badge-live">LINE CLAMP</span>
-                </div>
                 <div class="card-module-body snippet-body">
                     <div class="snippet-header-info">
                         <h2>Cortar texto en varias líneas</h2>
@@ -151,15 +120,6 @@ include 'includes/header.php';
 
             <!-- SNIPPET 4: Ocultar Scrollbar manteniendo scroll -->
             <article class="interactive-preview-card snippet-card" data-cat="ui" data-title="ocultar scrollbar scroll desaparecer barra desplazamiento">
-                <div class="card-glass-header" aria-hidden="true">
-                    <div class="window-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-                    <span class="window-title">hide-scrollbar.css</span>
-                    <span class="badge-live">SCROLL</span>
-                </div>
                 <div class="card-module-body snippet-body">
                     <div class="snippet-header-info">
                         <h2>Ocultar la barra de scroll</h2>
@@ -196,15 +156,6 @@ include 'includes/header.php';
 
             <!-- SNIPPET 5: Reset CSS Moderno y Ligero -->
             <article class="interactive-preview-card snippet-card" data-cat="reset" data-title="reset css moderno box sizing margin padding responsive media">
-                <div class="card-glass-header" aria-hidden="true">
-                    <div class="window-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-                    <span class="window-title">modern-reset.css</span>
-                    <span class="badge-live">RESET</span>
-                </div>
                 <div class="card-module-body snippet-body">
                     <div class="snippet-header-info">
                         <h2>Reset CSS moderno</h2>
@@ -239,15 +190,6 @@ img, picture, svg, video {
 
             <!-- SNIPPET 6: Efecto Glassmorphism (Efecto Vidrio) -->
             <article class="interactive-preview-card snippet-card" data-cat="effects" data-title="glassmorphism efecto vidrio backdrop filter blur transparencia">
-                <div class="card-glass-header" aria-hidden="true">
-                    <div class="window-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-                    <span class="window-title">glassmorphism.css</span>
-                    <span class="badge-live">EFECTOS</span>
-                </div>
                 <div class="card-module-body snippet-body">
                     <div class="snippet-header-info">
                         <h2>Efecto vidrio (glassmorphism)</h2>
@@ -278,15 +220,6 @@ img, picture, svg, video {
 
             <!-- SNIPPET 7: Cuadrícula Responsiva Auto-Fit (Sin Media Queries) -->
             <article class="interactive-preview-card snippet-card" data-cat="layout" data-title="grid responsive columnas auto fit minmax sin media queries">
-                <div class="card-glass-header" aria-hidden="true">
-                    <div class="window-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-                    <span class="window-title">auto-grid.css</span>
-                    <span class="badge-live">GRID</span>
-                </div>
                 <div class="card-module-body snippet-body">
                     <div class="snippet-header-info">
                         <h2>Cuadrícula que se adapta sola</h2>
@@ -317,15 +250,6 @@ img, picture, svg, video {
 
             <!-- SNIPPET 8: Texto con Gradiente (Gradient Text) -->
             <article class="interactive-preview-card snippet-card" data-cat="text" data-title="texto degradado gradiente gradient text background clip text">
-                <div class="card-glass-header" aria-hidden="true">
-                    <div class="window-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-                    <span class="window-title">gradient-text.css</span>
-                    <span class="badge-live">TEXTO</span>
-                </div>
                 <div class="card-module-body snippet-body">
                     <div class="snippet-header-info">
                         <h2>Texto con degradado</h2>
