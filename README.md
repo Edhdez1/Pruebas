@@ -20,7 +20,7 @@
 
 ## 📖 Descripción
 
-**CSS Helper** es una suite web interactiva pensada para acelerar el flujo de trabajo de cualquier desarrollador frontend. Ofrece herramientas visuales en tiempo real, paletas de colores curadas y un catálogo de snippets CSS listos para copiar e implementar al instante — sin dependencias externas y 100% Vanilla.
+**CSS Helper** es una suite web interactiva pensada para acelerar el flujo de trabajo de cualquier desarrollador frontend. Ofrece herramientas visuales en tiempo real, paletas de colores curadas y un catálogo de snippets CSS listos para copiar e implementar al instante — con JavaScript puro, sin frameworks ni librerías.
 
 ---
 
@@ -29,28 +29,28 @@
 ### 🛠️ Herramientas Interactivas
 | Herramienta | Descripción |
 |---|---|
-| 🎨 **Selector de Color** | Genera código HEX, RGB y HSL con vista previa en vivo |
-| 📦 **Box Model** | Visualiza y ajusta `margin`, `padding` y `border` interactivamente |
-| 🧩 **Flexbox Builder** | Construye layouts Flexbox con controles visuales y código generado |
-| 🔆 **Verificador de Contraste** | Comprueba el ratio de contraste WCAG entre dos colores |
-| 🔤 **Buscador de Fuentes** | Busca fuentes de Google y obtén el código HTML e `@import` listo |
-| ✨ **Efectos CSS** | Genera sombras (`box-shadow`) y transiciones personalizadas |
+| 🎨 **Selector de color** | Genera código HEX, RGB y HSL con vista previa en vivo (ratón, táctil y teclado) |
+| 📦 **Modelo de caja** | Arrastra los bordes para ajustar `margin`, `padding` y `border` |
+| 🧩 **Flexbox y Grid** | Construye layouts Flexbox o CSS Grid con controles visuales |
+| 🔆 **Contraste y accesibilidad** | Calcula el ratio WCAG 2.1 entre dos colores y muestra si cumple AA/AAA |
+| 🔤 **Fuentes de Google** | Previsualiza fuentes y obtén el código `<link>` e `@import` listo |
+| ✨ **Efectos visuales** | Cuatro efectos listos (neón, vidrio, degradado, elevación) con su código |
 | 🪟 **Glassmorphism** | Ajusta blur, opacidad y sombra para el efecto glassmorphism |
 
 ### 🎨 Paletas de Colores
-- Colección de paletas curadas (Catppuccin, Material, Nord, Dracula y más)
+- Paletas Catppuccin, Dracula y escalas de grises (neutra, Slate y Stone)
 - Cada paleta incluye subpaletas con sus variantes claro/oscuro
 - Copia cualquier color en formato **HEX**, **RGB** o **HSL** con un solo clic
-- Vista previa de swatches de color
+- Exporta una paleta completa como variables CSS, Tailwind, JSON o mapa SCSS
 
 ### 📝 Snippets CSS
-- Biblioteca de fragmentos CSS organizados por categorías (Layout, Texto, Efectos, etc.)
+- Biblioteca de fragmentos CSS organizados por categorías (maquetación, texto, scroll, reset, efectos)
 - Buscador en tiempo real
 - Vista previa visual de cada snippet
 - Botón de copia instantánea
 
 ### 🌙 Modo Oscuro / Claro
-- Alternancia entre tema claro y oscuro con persistencia en `localStorage`
+- Sigue la preferencia del sistema; si eliges un tema manualmente, se recuerda en `localStorage`
 
 ---
 
@@ -70,7 +70,7 @@
 
 - **Backend:** PHP 8+ con PDO
 - **Frontend:** HTML5, CSS3 y JavaScript puro (sin frameworks ni librerías)
-- **Base de Datos:** MySQL (gestionada con XAMPP / cualquier servidor LAMP/WAMP)
+- **Base de datos:** MySQL opcional (XAMPP, LAMP/WAMP). Sin MySQL, el selector de fuentes usa una lista de respaldo
 - **Sin dependencias de Node.js, npm ni bundlers**
 
 ---
@@ -86,11 +86,12 @@ CssHelper/
 │
 ├── backend/
 │   ├── db.php              # Conexión PDO y auto-creación de BD y tabla de fuentes
+│   ├── fonts_data.php      # Lista de fuentes (datos iniciales y respaldo sin MySQL)
 │   ├── get_font.php        # API: buscar fuente por nombre
 │   └── get_all_fonts.php   # API: listar todas las fuentes
 │
 ├── includes/
-│   ├── header.php          # Cabecera HTML global y navegación
+│   ├── header.php          # Cabecera HTML global (<head>, iconos y navegación)
 │   ├── navbar.php          # Componente de barra de navegación
 │   ├── footer.php          # Pie de página global
 │   └── palettes_data.php   # Data de paletas y funciones HEX→RGB/HSL
@@ -106,7 +107,7 @@ CssHelper/
 │   ├── glassmorphism.js    # Generador de glassmorphism
 │   ├── palettes.js         # Lógica de paletas y copia al portapapeles
 │   ├── snippets.js         # Filtrado y copia de snippets
-│   └── toast.js            # Componente de notificaciones toast
+│   └── toast.js            # Avisos (toast) y ayudante para copiar al portapapeles
 │
 └── styles/
     └── styles.css          # Hoja de estilos global
@@ -116,7 +117,7 @@ CssHelper/
 
 ## ⚙️ Instalación
 
-> **Requisitos:** PHP 8+, MySQL y un servidor web (XAMPP, WAMP, Laragon, etc.)
+> **Requisitos:** PHP 8+ y un servidor web (XAMPP, WAMP, Laragon, etc.). MySQL es opcional.
 
 ### 1. Clona el repositorio
 
@@ -144,7 +145,11 @@ Levanta tu servidor local desde el panel de control de XAMPP (o el equivalente).
 http://localhost/CssHelper/
 ```
 
-La base de datos y la tabla de fuentes se crean **automáticamente** en el primer acceso gracias al script `backend/db.php`.
+La base de datos y la tabla de fuentes se crean **automáticamente** en el primer acceso gracias al script `backend/db.php`. Si MySQL no está disponible, la app funciona igual con la lista de fuentes de respaldo.
+
+Para usar otras credenciales de MySQL, define las variables de entorno `CSSHELPER_DB_HOST`, `CSSHELPER_DB_USER` y `CSSHELPER_DB_PASS`.
+
+> **Prueba rápida sin XAMPP:** desde la carpeta del proyecto ejecuta `php -S localhost:8000` y abre `http://localhost:8000`.
 
 ---
 
@@ -173,7 +178,7 @@ La base de datos y la tabla de fuentes se crean **automáticamente** en el prime
 
 ## 📄 Licencia
 
-Este proyecto está bajo la licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) para más información.
+Este proyecto se declara bajo la licencia **MIT**, pero el repositorio todavía no incluye el archivo `LICENSE`. Agrégalo para que la licencia sea válida.
 
 ---
 
